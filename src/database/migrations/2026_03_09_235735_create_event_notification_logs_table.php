@@ -1,13 +1,23 @@
-public function up()
-{
-    Schema::table('events', function (Blueprint $table) {
-        $table->string('calendar_type')->default('private');
-    });
-}
+<?php
 
-public function down()
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
 {
-    Schema::table('events', function (Blueprint $table) {
-        $table->dropColumn('calendar_type');
-    });
-}
+    public function up(): void
+    {
+        Schema::create('event_notification_logs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->timestamp('sent_at')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('event_notification_logs');
+    }
+};

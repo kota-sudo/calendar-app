@@ -1,13 +1,22 @@
-public function up()
-{
-    Schema::table('events', function (Blueprint $table) {
-        $table->integer('notification_minutes')->nullable();
-    });
-}
+<?php
 
-public function down()
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
 {
-    Schema::table('events', function (Blueprint $table) {
-        $table->dropColumn('notification_minutes');
-    });
-}
+    public function up(): void
+    {
+        Schema::table('events', function (Blueprint $table) {
+            $table->string('calendar_type')->default('private');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropColumn('calendar_type');
+        });
+    }
+};

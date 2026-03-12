@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-title" content="Calendar">
     <link rel="apple-touch-icon" href="/icons/icon-192.png">
 
-    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+    <link rel="stylesheet" href="/css/calendar.css">
 </head>
 <body>
 
@@ -521,7 +521,7 @@
     });
     </script>
 
-    <script src="{{ asset('js/browser-notifications.js') }}"></script>
+    <script src="/js/browser-notifications.js"></script>
 
     <script>
     if ('serviceWorker' in navigator) {

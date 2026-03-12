@@ -20,7 +20,10 @@ WORKDIR /var/www
 COPY ./src /var/www
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
-RUN npm install
+
+ENV NODE_ENV=development
+RUN npm ci || npm install
 RUN npm run build
+RUN test -f /var/www/public/build/manifest.json
 
 CMD sh -c "php artisan config:clear && php artisan cache:clear && php artisan view:clear && php artisan route:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"

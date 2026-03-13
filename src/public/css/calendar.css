@@ -1,13 +1,3 @@
-body {
-    background: red !important;
-}
-
-.month-nav a {
-    background: blue !important;
-    color: white !important;
-    padding: 20px !important;
-}
-
 
 :root {
     --gc-blue: #1a73e8;

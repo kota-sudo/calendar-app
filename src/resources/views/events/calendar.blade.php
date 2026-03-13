@@ -232,17 +232,15 @@
             {{ $calendar->name }}
         </a>
 
-        @if($calendar->owner_user_id === auth()->id())
-            <div class="calendar-filter-action-links">
-                <a href="{{ route('calendars.edit', $calendar->id) }}" class="calendar-filter-sub-link">
-                    名前変更
-                </a>
+        <div class="calendar-filter-action-links">
+    <a href="{{ route('calendars.edit', $calendar->id) }}" class="calendar-filter-sub-link">
+        名前変更
+    </a>
 
-                <a href="{{ route('calendars.share.edit', $calendar->id) }}" class="calendar-filter-sub-link">
-                    共有
-                </a>
-            </div>
-        @endif
+    <a href="{{ route('calendars.share.edit', $calendar->id) }}" class="calendar-filter-sub-link">
+        共有
+    </a>
+</div>
     </div>
 @endforeach
         </div>

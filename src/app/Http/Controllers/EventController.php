@@ -32,18 +32,40 @@ class EventController extends Controller
     }
 
     public function create(Request $request)
-    {
-        $selectedDate = $request->input('date');
-        $calendarId = $request->input('calendar_id');
+{
+    $selectedDate = $request->input('date');
+    $calendarId = $request->input('calendar_id');
 
-        $calendarIds = $this->getAccessibleCalendarIds();
+    $calendarIds = $this->getAccessibleCalendarIds();
 
-        $calendars = Calendar::whereIn('id', $calendarIds)
+    $calendars = Calendar::whereIn('id', $calendarIds)
+        ->orderBy('id')
+        ->get();
+
+    // 念のため、自分のカレンダーが取れていないときの保険
+    if ($calendars->isEmpty()) {
+        $calendars = Calendar::where('owner_user_id', auth()->id())
             ->orderBy('id')
             ->get();
-
-        return view('events.create', compact('selectedDate', 'calendars', 'calendarId'));
     }
+
+    // それでも0件なら、自分用カレンダーを自動作成
+    if ($calendars->isEmpty()) {
+        $calendar = Calendar::create([
+            'name' => 'マイカレンダー',
+            'owner_user_id' => auth()->id(),
+        ]);
+
+        $calendars = collect([$calendar]);
+        $calendarId = $calendar->id;
+    }
+
+    if (empty($calendarId) && $calendars->isNotEmpty()) {
+        $calendarId = $calendars->first()->id;
+    }
+
+    return view('events.create', compact('selectedDate', 'calendars', 'calendarId'));
+}
 
     public function store(Request $request)
     {

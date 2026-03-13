@@ -55,18 +55,29 @@
             </div>
 
             <div class="form-group">
-                <label for="calendar_id">カレンダー</label>
-                <select id="calendar_id" name="calendar_id" class="@error('calendar_id') input-error @enderror" required>
-                    @foreach($calendars as $calendar)
-                        <option value="{{ $calendar->id }}" {{ (string)$selectedCalendarId === (string)$calendar->id ? 'selected' : '' }}>
-                            {{ $calendar->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('calendar_id')
-                    <p class="field-error">{{ $message }}</p>
-                @enderror
-            </div>
+    <label for="calendar_id">カレンダー</label>
+
+    @if($calendars->count() === 1)
+        <input type="hidden" name="calendar_id" value="{{ $calendars->first()->id }}">
+
+        <div class="single-calendar-display">
+            {{ $calendars->first()->name }}
+        </div>
+    @else
+        <select id="calendar_id" name="calendar_id" class="@error('calendar_id') input-error @enderror" required>
+            <option value="">カレンダーを選択してください</option>
+            @foreach($calendars as $calendar)
+                <option value="{{ $calendar->id }}" {{ (string)$selectedCalendarId === (string)$calendar->id ? 'selected' : '' }}>
+                    {{ $calendar->name }}
+                </option>
+            @endforeach
+        </select>
+    @endif
+
+    @error('calendar_id')
+        <p class="field-error">{{ $message }}</p>
+    @enderror
+</div>
 
             <div class="form-group">
                 <label for="calendar_type">カレンダー種別</label>

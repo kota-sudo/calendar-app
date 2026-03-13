@@ -644,12 +644,8 @@ h1 {
     color: #9dbcf7 !important;
 }
 
-.form-group select,
-.form-group input[type="date"] {
-    appearance: none;
-    -webkit-appearance: none;
-    background: #fff;
-}
+form-group select,
+.form-group input
 
 .danger-zone {
     margin-top: 28px;
@@ -1825,4 +1821,18 @@ h1 {
         gap: 14px;
         padding-right: 4px;
     }
+}
+
+.single-calendar-display {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border: 1px solid var(--gc-border);
+    border-radius: 14px;
+    font-size: 16px;
+    background: #fff;
+    color: var(--gc-text);
+    min-height: 56px;
+    display: flex;
+    align-items: center;
 }

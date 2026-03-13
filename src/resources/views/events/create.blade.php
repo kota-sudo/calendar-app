@@ -79,17 +79,7 @@
     @enderror
 </div>
 
-            <div class="form-group">
-                <label for="calendar_type">カレンダー種別</label>
-                <select id="calendar_type" name="calendar_type" class="@error('calendar_type') input-error @enderror">
-                    <option value="work" {{ $selectedCalendarType === 'work' ? 'selected' : '' }}>仕事</option>
-                    <option value="private" {{ $selectedCalendarType === 'private' ? 'selected' : '' }}>プライベート</option>
-                    <option value="family" {{ $selectedCalendarType === 'family' ? 'selected' : '' }}>家族</option>
-                </select>
-                @error('calendar_type')
-                    <p class="field-error">{{ $message }}</p>
-                @enderror
-            </div>
+            
 
             <div class="schedule-row">
                 <div class="schedule-label">開始</div>

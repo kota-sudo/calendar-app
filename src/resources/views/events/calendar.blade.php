@@ -225,27 +225,24 @@
                 すべて
             </a>
 
-            @foreach($calendars as $calendar)
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+           @foreach($calendars as $calendar)
+    <div class="calendar-filter-row">
         <a href="/calendar?year={{ $currentYear }}&month={{ $currentMonth }}&calendar_id={{ $calendar->id }}"
-           class="calendar-filter-link {{ (string)$calendarId === (string)$calendar->id ? 'active' : '' }}"
-           style="flex: 1; margin-bottom: 0;">
+           class="calendar-filter-link calendar-filter-main-link {{ (string)$calendarId === (string)$calendar->id ? 'active' : '' }}">
             {{ $calendar->name }}
         </a>
 
         @if($calendar->owner_user_id === auth()->id())
-    <div style="display:flex; gap:10px; align-items:center; white-space: nowrap;">
-        <a href="{{ route('calendars.edit', $calendar->id) }}"
-           style="font-size: 12px; color: #666; text-decoration: none;">
-            名前変更
-        </a>
+            <div class="calendar-filter-action-links">
+                <a href="{{ route('calendars.edit', $calendar->id) }}" class="calendar-filter-sub-link">
+                    名前変更
+                </a>
 
-        <a href="{{ route('calendars.share.edit', $calendar->id) }}"
-           style="font-size: 12px; color: #1a73e8; text-decoration: none;">
-            共有
-        </a>
-    </div>
-@endif
+                <a href="{{ route('calendars.share.edit', $calendar->id) }}" class="calendar-filter-sub-link">
+                    共有
+                </a>
+            </div>
+        @endif
     </div>
 @endforeach
         </div>
